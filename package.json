@@ -1,0 +1,17 @@
+{
+  "name": "pw-ui-test-fw",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "conduit-bvt": "npx playwright test --grep \"@sanity|@smoke|@regression|@bvt\"",
+    "conduit-sanity": "npx playwright test --grep \"@sanity\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.57.0",
+    "@types/node": "^25.0.3"
+  }
+}

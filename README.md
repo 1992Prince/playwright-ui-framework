@@ -82,6 +82,26 @@ This framework comes with pre-configured scripts to run different test suites ba
 
 ## CI/CD Integration
 
+### Headless Mode and Live Execution Considerations
+
+By default, Playwright UI tests execute in **headless mode**, meaning they run in the background without a visible browser UI. This is standard for CI/CD environments and faster test execution.
+
+If you attempt to run tests in **headed mode** (e.g., by setting `headless: false` in `playwright.config.ts`) without a graphical environment (like an XServer) configured, you might encounter errors such as:
+
+```
+Looks like you launched a headed browser without having an XServer running.
+```
+
+For viewing live test execution in such environments (e.g., within a Docker container or remote server), you'll need to:
+
+1.  Ensure an XServer is running.
+2.  Enable VNC within your environment.
+3.  Perform port-forwarding to access the VNC session on your local machine and view the live execution.
+
+It's generally recommended to keep tests in headless mode for CI/CD and local development unless specific debugging requires a headed browser.
+
+## CI/CD Integration
+
 This framework is built for scalability and can be integrated into any modern CI/CD platform (like Jenkins, CircleCI, GitLab, etc.). It currently includes a pre-configured, robust workflow for **GitHub Actions**.
 
 The workflow is defined in `.github/workflows/playwright.yml`.
@@ -100,6 +120,9 @@ The test suite is automatically triggered to run on the following events:
 2.  **Run Tests**: It executes the `conduit-sanity` test suite using `npm run conduit-sanity`.
 3.  **Generate & Upload Artifacts**: Upon completion, the `playwright-report/` and `test-results/` directories are uploaded as artifacts. This allows you to download and view the detailed HTML report and other test outputs for 30 days.
 4.  **Notifications**: The workflow is configured to send email notifications with a summary of the test results (Total, Passed, Failed, Skipped) after every run.
+    -   **Email Configuration Notes:**
+        -   The `GMAIL_APP_PASSWORD` is stored as a GitHub Repository Secret for security.
+        -   Currently, the workflow sends a summary email. Attaching the full HTML report directly to the email is not natively supported by the `dawidd6/action-send-mail` action in a straightforward manner. Consider uploading the report as an artifact and providing a link in the email body, or exploring alternative email actions that support attachments.
 
 This setup ensures that tests are continuously run, providing rapid feedback on code changes and nightly reports on the application's stability.
 

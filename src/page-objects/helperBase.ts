@@ -21,6 +21,22 @@ export abstract class HelperBase {
     // -------------------------------
     // Safe Actions (Dynamic waits)
     // -------------------------------
+    // protected async safeClick(
+    //     locator: Locator,
+    //     errorMessage?: string
+    // ): Promise<void> {
+    //     try {
+    //         await locator.waitFor({ state: 'visible' });
+    //         await locator.scrollIntoViewIfNeeded();
+    //         await expect(locator).toBeEnabled();
+    //         await locator.click();
+    //     } catch (error) {
+    //         throw new UIError(
+    //             errorMessage ?? 'Failed to click on element'
+    //         );
+    //     }
+    // }
+
     protected async safeClick(
         locator: Locator,
         errorMessage?: string
@@ -31,8 +47,11 @@ export abstract class HelperBase {
             await expect(locator).toBeEnabled();
             await locator.click();
         } catch (error) {
+            const pageName = this.constructor.name;
+
             throw new UIError(
-                errorMessage ?? 'Failed to click on element'
+                `[${pageName}] ${errorMessage ?? 'Failed to click on element'}`,
+                error
             );
         }
     }

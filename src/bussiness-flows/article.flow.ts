@@ -51,6 +51,10 @@ export class ArticleFlow {
         return await this.articlePage.getAllTagsList();
     }
 
+    async getAllTagsListErr(){
+        return await this.articlePage.getAllTagsListError();
+    }
+
     async deleteCurrentArticle(): Promise<void> {
         await this.articlePage.deleteArticle();
     }

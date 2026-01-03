@@ -11,6 +11,7 @@ export class ConduitArticlePage extends HelperBase {
     private readonly publicArticleBtn: Locator;
     private readonly deleteArticleBtn: Locator;
     private readonly allTagsLocator: Locator;
+    private readonly allTagsLocatorErr: Locator;
 
     constructor(page: Page) {
         super(page);
@@ -22,6 +23,7 @@ export class ConduitArticlePage extends HelperBase {
         this.publicArticleBtn = page.getByText("Publish Article");
         this.deleteArticleBtn = page.getByText("Delete Article").last();
         this.allTagsLocator = page.locator('.tag-list');
+        this.allTagsLocatorErr = page.locator('.tag-list2');
     }
 
     isAt(): Promise<void> {
@@ -72,6 +74,12 @@ export class ConduitArticlePage extends HelperBase {
 
     async getAllTagsList(){
         return await this.allTagsLocator.allTextContents();
+    }
+
+    async getAllTagsListError(){
+        await this.safeClick(this.allTagsLocatorErr,
+            'ARTICLE PAGE ERROR: Unable to click on GetAllTags Article link'
+        );
     }
 
 }

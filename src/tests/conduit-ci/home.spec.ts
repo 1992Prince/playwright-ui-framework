@@ -57,7 +57,15 @@ test('Validate home page after login3 @sanity', async ({ authenticatedPage }) =>
 
 });
 
-test('Validate home page after login4 @bvt', async ({ authenticatedPage }) => {
+test('Validate home page after login4 @sanity', async ({ authenticatedPage }) => {
+  const pm = new PageManager(authenticatedPage);
+  const articleFlow = pm.getArticleFlow();
+  await articleFlow.getAllTagsListErr();
+
+
+});
+
+test('Validate home page after login5 @bvt', async ({ authenticatedPage }) => {
 
   consoleLogger.info('Start of test: Validate home page after login');
   const pm = new PageManager(authenticatedPage);

@@ -150,6 +150,7 @@ pw-ui-test-fw/
 ├── src/
 │   ├── bussiness-flows/  # Encapsulates multi-step business logic (e.g., creating an article)
 │   ├── config/           # Environment variables and application configuration
+│   ├── constants/        # Holds all static values and magic strings used across the framework
 │   ├── errors/           # Custom error classes for better failure analysis
 │   ├── fixtures/         # Playwright fixtures for setup/teardown (e.g., authentication)
 │   ├── page-objects/     # Page Object Model classes representing application pages

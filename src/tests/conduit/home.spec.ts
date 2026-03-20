@@ -1,7 +1,6 @@
 import { test } from '../../fixtures/auth.fixture';
 import { PageManager } from '../../page-objects/pageManager';
-import { consoleLogger } from '../../utils/consoleLoggerSingletonInstance'
-
+import { consoleLogger } from '../../utils/logger'
 
 test.beforeAll('run once before all tests', async ({ config }) => {
 

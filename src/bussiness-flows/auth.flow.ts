@@ -1,7 +1,7 @@
 import { PageManager } from '../page-objects/pageManager';
 import { ConduitLoginPage } from '../page-objects/conduit-login-logout.page';
 import { TestExecutionError } from '../errors/testLevelGenericError';
-import { consoleLogger } from '../utils/consoleLoggerSingletonInstance'
+import { consoleLogger } from '../utils/logger'
 
 export class AuthFlow {
     private readonly pm: PageManager;

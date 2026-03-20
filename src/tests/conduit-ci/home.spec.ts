@@ -1,7 +1,7 @@
 import { expect } from '@playwright/test';
 import { test } from '../../fixtures/auth.fixture';
 import { PageManager } from '../../page-objects/pageManager';
-import { consoleLogger } from '../../utils/consoleLoggerSingletonInstance'
+import { consoleLogger } from '../../utils/logger'
 import { TestExecutionError } from '../../errors/testLevelGenericError';
 
 

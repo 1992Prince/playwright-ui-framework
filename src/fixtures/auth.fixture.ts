@@ -3,7 +3,7 @@ import { PageManager } from '../page-objects/pageManager';
 import { AuthFlow } from '../bussiness-flows/auth.flow';
 import { config } from '../config/config';
 import { TestExecutionError } from '../errors/testLevelGenericError';
-import { consoleLogger } from '../utils/consoleLoggerSingletonInstance'
+import { consoleLogger } from '../utils/logger'
 
 
 type AuthFixtures = {

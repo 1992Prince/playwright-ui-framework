@@ -1,4 +1,5 @@
 import { Page, Locator } from '@playwright/test';
+import { consoleLogger } from '../utils/logger';
 
 export class FormLayoutPage {
 
@@ -15,11 +16,14 @@ export class FormLayoutPage {
      * @param optionTxt 
      */
     async submitUsingGridFormWithCredAndSelectOption(email: string, password: string, optionTxt: string) {
+        // password is intentionally excluded from logs — never log credentials
+        consoleLogger.info('FormLayoutPage.submitUsingGridFormWithCredAndSelectOption: Submitting Grid form. email=%s | option=%s', email, optionTxt);
         const usingTheGridForm = this.page.locator('nb-card', { hasText: "Using the Grid" });
         await usingTheGridForm.getByRole('textbox', { name: 'Email' }).fill(email);
         await usingTheGridForm.getByRole('textbox', { name: 'Password' }).fill(password);
         await usingTheGridForm.getByRole('radio', { name: optionTxt }).check({ force: true });
         await usingTheGridForm.getByRole('button').click();
+        consoleLogger.info('FormLayoutPage.submitUsingGridFormWithCredAndSelectOption: Grid form submitted');
     }
 
     /**
@@ -29,6 +33,7 @@ export class FormLayoutPage {
      * @param rememberMe  - if true, the 'Remember me' checkbox will be checked
      */
     async submitInlineFormWithCredAndCheckbox(name: string, email: string, rememberMe: boolean) {
+        consoleLogger.info('FormLayoutPage.submitInlineFormWithCredAndCheckbox: Submitting Inline form. name=%s | email=%s | rememberMe=%s', name, email, rememberMe);
         const usingInlineForm = this.page.locator('nb-card', { hasText: "Inline form" });
         await usingInlineForm.getByRole('textbox', { name: 'Jane Doe' }).fill(name);
         await usingInlineForm.getByRole('textbox', { name: 'Email' }).fill(email);
@@ -36,5 +41,6 @@ export class FormLayoutPage {
             await usingInlineForm.getByRole('checkbox').check({ force: true });
         }
         await usingInlineForm.getByRole('button').click();
+        consoleLogger.info('FormLayoutPage.submitInlineFormWithCredAndCheckbox: Inline form submitted');
     }
 }

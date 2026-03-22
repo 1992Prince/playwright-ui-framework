@@ -1,5 +1,6 @@
 import { Page, Locator, expect } from '@playwright/test';
 import { HelperBase } from './helperBase';
+import { consoleLogger } from '../utils/logger';
 
 export class ToasterPage extends HelperBase {
 
@@ -21,20 +22,22 @@ export class ToasterPage extends HelperBase {
     }
 
     async getRandomToasterMsz(){
+        consoleLogger.info('ToasterPage.getRandomToasterMsz: Clicking Random Toast button');
         this.randomToastGeneratorBtn.click();
         await expect(this.randomToastMsz).toBeVisible();
-        let randomToastMsz = await this.randomToastMsz.textContent();
-        console.log("Random Toast Message: " + randomToastMsz);
+        const randomToastMsz = await this.randomToastMsz.textContent();
+        consoleLogger.info('ToasterPage.getRandomToasterMsz: Toast appeared. message=%s', randomToastMsz);
     }
 
     async selectToastTypeAndGenerateToast(toastType: string){
+        consoleLogger.info('ToasterPage.selectToastTypeAndGenerateToast: Selecting toast type=%s', toastType);
         await this.toastTypeSelectBtn.click();
         const toastTypeOption = this.page.getByText(toastType);
         await toastTypeOption.click();
         await this.showToastBtn.click();
         await expect(this.randomToastMsz).toBeVisible();
-        let randomToastMsz = await this.randomToastMsz.textContent();
-        console.log("Random Toast Message: " + randomToastMsz);
+        const randomToastMsz = await this.randomToastMsz.textContent();
+        consoleLogger.info('ToasterPage.selectToastTypeAndGenerateToast: Toast appeared. type=%s | message=%s', toastType, randomToastMsz);
     }
 
 }

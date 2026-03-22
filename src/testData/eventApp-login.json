@@ -1,0 +1,21 @@
+{
+  "validLogin": {
+    "inputs": {
+      "username": "user1",
+      "password": "pass1"
+    },
+    "expected": {
+      "message": "Login successful"
+    }
+  },
+
+  "invalidLogin": {
+    "inputs": {
+      "username": "invalid-user2",
+      "password": "invalid-pass2"
+    },
+    "expected": {
+      "message": "Invalid credentials"
+    }
+  }
+}

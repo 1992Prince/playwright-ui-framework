@@ -33,7 +33,7 @@ export default defineConfig({
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
-    headless: false,
+    headless: true,
     video: 'on',
     screenshot: 'on'
   },
@@ -52,6 +52,10 @@ export default defineConfig({
       testDir: 'src/tests/conduit-ci',
       //dependencies: ['setup'],
     },
+    {
+      name: 'eventapp',
+      testDir: 'src/tests/eventApp',
+    }
   ],
 
   /* Run your local dev server before starting the tests */

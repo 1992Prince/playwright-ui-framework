@@ -1,5 +1,6 @@
 import { ConduitArticlePage } from '../page-objects/conduit-home.page';
 import { PageManager } from '../page-objects/pageManager';
+import { consoleLogger } from '../utils/logger';
 
 export class ArticleFlow {
 
@@ -36,6 +37,9 @@ export class ArticleFlow {
     }
 
     async publish(): Promise<void> {
+        consoleLogger.info('ArticleFlow.publish: Starting article publish flow');
+        consoleLogger.debug('ArticleFlow.publish: title=%s | about=%s | tags=%s', this.title, this.about, this.tags);
+
         await this.articlePage.newArticle();
         await this.articlePage.inputArticleTitle(this.title);
         await this.articlePage.inputArticleAbout(this.about);
@@ -43,20 +47,28 @@ export class ArticleFlow {
         await this.articlePage.inputArticleTags(this.tags);
         await this.articlePage.publishArticle();
 
+        consoleLogger.info('ArticleFlow.publish: Article published successfully. title=%s', this.title);
+
         // optional: reset state to avoid leakage
         this.reset();
     }
 
     async getAllTagsList(){
-        return await this.articlePage.getAllTagsList();
+        consoleLogger.debug('ArticleFlow.getAllTagsList: Fetching all tags');
+        const tags = await this.articlePage.getAllTagsList();
+        consoleLogger.debug('ArticleFlow.getAllTagsList: Retrieved %s tag(s)', tags.length);
+        return tags;
     }
 
     async getAllTagsListErr(){
+        consoleLogger.debug('ArticleFlow.getAllTagsListErr: Fetching all tags (error path)');
         return await this.articlePage.getAllTagsListError();
     }
 
     async deleteCurrentArticle(): Promise<void> {
+        consoleLogger.info('ArticleFlow.deleteCurrentArticle: Deleting current article');
         await this.articlePage.deleteArticle();
+        consoleLogger.info('ArticleFlow.deleteCurrentArticle: Article deleted successfully');
     }
 
     private reset() {

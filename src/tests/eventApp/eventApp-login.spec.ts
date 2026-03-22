@@ -6,8 +6,11 @@ import { consoleLogger } from '../../utils/logger';
 import { getTestData } from "../../utils/data-factory";
 
 // ── beforeAll: runs once before all tests in this file ───────────────────────
-test.beforeAll('EventApp suite setup', async () => {
+test.beforeAll('EventApp suite setup', async ( {config} ) => {
     consoleLogger.info('beforeAll: EventApp login suite starting. runId=%s', process.env.RUN_ID);
+    consoleLogger.info('beforeAll: Opening Application=%s', config.EventApplication);
+    consoleLogger.debug('beforeAll: Auth API URL=%s', config.Env);
+    consoleLogger.info('RUN-ID=%s', process.env.RUN_ID);
 });
 
 // ── Test: Validate login and homepage ────────────────────────────────────────
@@ -45,7 +48,7 @@ test('Validate EventApp homepage loads after login ', async ({ eventAppPm }) => 
 // read test data from JSON file from testData folder using the getTestData() utility function
 const loginData = getTestData("eventApp-login");
 
-test.only('Load login creds from testData file sample ', async ({ eventAppPm }) => {
+test('Load login creds from testData file sample ', async ({ eventAppPm }) => {
     consoleLogger.info('Start of test: Validate EventApp homepage loads after login');
 
     consoleLogger.info('Login creds from testData: email=%s | password=%s', loginData.invalidLogin.inputs.username,

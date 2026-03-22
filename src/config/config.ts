@@ -17,6 +17,7 @@ const config = {
   dbPassword: process.env.DB_PASSWORD || 'password123',
   Release: process.env.RELEASE || '21.09',
   Application: process.env.APPLICATION || 'Conduit-API-UI',
+  EventApplication: process.env.EVENTAPPLICATION || 'EventApp-Bookings',
   Env: env,
   authTokenBaseUrl:
     process.env.AUTH_TOKEN_BASE_URL ||
